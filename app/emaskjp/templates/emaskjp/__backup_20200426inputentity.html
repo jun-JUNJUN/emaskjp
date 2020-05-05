@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title> emask-jp | 医療機関登録</title>
+    <style>
+        .p-demand-qty {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+    <form action="{% url 'emaskjp:post_confirm' %}" method="post" class="h-adr">
+        {% csrf_token %}
+        <input type="hidden" class="p-country-name" value="Japan">
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        {{ form.non_field_errors }}
+
+        マスクが足りない数を入力してください。
+        <table>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+
+
+        </table>
+        {{ formset_mask.management_form }}
+        <table>
+            <tr></tr>
+            <tr>
+                {% for form_mm in formset_mask %}
+                <th>{{ form_mm.begin_date_display.value }}{{ form_mm.begin_date_display.as_hidden }}{{ form_mm.begin_date.as_hidden }}
+                </th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for form_mm in formset_mask %}
+                <td>{{ form_mm.demand_qty }}</td>
+                {% endfor %}
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

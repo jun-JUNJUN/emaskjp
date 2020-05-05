@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title> emask-jp | トップページ</title>
+</head>
+
+<body>
+    <table>
+        {% for ss in supplyrequest_top %}
+        <tr>
+            <td>
+                {{ ss.entity.entity_name }}
+            </td>
+            <td>
+                {{ ss.begin_date }}
+            </td>
+            <td>
+                {{ ss.request_qty }}
+            </td>
+            <td>
+                {{ ss.last_update }}
+            </td>
+            <td>
+                {{ ss.last_calculated }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>

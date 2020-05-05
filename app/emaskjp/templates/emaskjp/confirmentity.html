@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title> emask-jp | 医療機関登録確認</title>
+</head>
+
+<table>
+    <tr>
+        <td>医療機関名:</td>
+        <td>{{ form.entity_name.value }}</td>
+    </tr>
+    <tr>
+        <td>郵便番号:</td>
+        <td>{{ form.zip_code.value }}</td>
+    </tr>
+    <tr>
+        <td>都道府県:</td>
+        <td>{{ form.prefecture.value }}</td>
+    </tr>
+    <tr>
+        <td>市区町村番地:</td>
+        <td>{{ form.address1.value }}</td>
+    </tr>
+    <tr>
+        <td>建物名:</td>
+        <td>{{ form.address2.value }}</td>
+    </tr>
+</table>
+マスクが足りない数:
+<table>
+    <tr>
+        {% for form_mm in formset_mask %}
+        <th>{{ form_mm.begin_date_display.value }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% for form_mm in formset_mask %}
+        <td>{{ form_mm.demand_qty.value }}</td>
+        {% endfor %}
+    </tr>
+</table>
+
+<body>
+    <form action="{% url 'emaskjp:post_submit' %}" method="post" class="h-adr">
+        {% csrf_token %}
+        <input type="hidden" class="p-country-name" value="Japan">
+        {% for field in form %}
+        {{field.as_hidden}}
+        {% endfor %}
+        {{ formset_mask.management_form }}
+        {% for form_mm in formset_mask %}
+        {{ form_mm.begin_date_display.as_hidden }}
+        {{ form_mm.begin_date.as_hidden }}
+        {{ form_mm.demand_qty.as_hidden }}
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+<h1></h1>
+
+{% if error_message %}
+<p><strong>{{  error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'forwarderchat:inputrfi' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="customer_company" id="rfi_customer_company" value="">
+    <label for="rfi_customer_company">会社名</label><br>
+    <input type="text" name="customer_name" id="rfi_customer_name" value="">
+    <label for="rfi_customer_name">名前(姓 名)</label><br>
+    <input type="text" name="customer_prefecture" id="rfi_customer_prefecture" value="">
+    <label for="rfi_customer_prefecture">都道府県</label><br>
+    <input type="text" name="customer_addr" id="rfi_customer_addr" value="" size="50">
+    <label for="rfi_customer_addr">住所</label><br>
+    <input type="submit" value="送信">
+</form>

@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  db:
+    container_name: postgres117
+    image: postgres:11.7-alpine
+    volumes:
+      - ./data/postgres:/var/lib/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DATABASE: 'srenewal'
+      POSTGRES_USER: 'srenewal'
+      POSTGRES_PASSWORD: 'completely'
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
+  pgadmin4:
+    image: dpage/pgadmin4:4.19
+    container_name: pgadmin4
+    restart: always
+    hostname: pgadmin4
+    links:
+      - db
+    ports:
+      - 8899:8899
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: 'srenewal'
+      PGADMIN_DEFAULT_PASSWORD: 'completely'
+      PGADMIN_LISTEN_PORT: '8899'
+    volumes:
+          - pgadmin_data:/var/lib/pgadmin
+  web:
+    container_name: djangoapp
+    build: .
+    volumes:
+      - ../app:/code
+    tty: true
+    ports:
+      - 8000:8000
+      - 5678:5678
+    depends_on:
+      - db
+volumes: 
+  pgadmin_data:
+
+

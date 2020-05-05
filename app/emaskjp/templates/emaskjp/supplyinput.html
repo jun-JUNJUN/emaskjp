@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title> emask-jp | マスク送付予約</title>
+    <style>
+        .p-demand-qty {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    お届け先:
+    <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+    <form action="{% url 'emaskjp:supplysubmit' %}" method="post" class="h-adr">
+        {% csrf_token %}
+        <table><input radio id="id_aaa">
+            {% for sss in selected_reqs %}
+            <tr>
+                <td><input type="radio" value="{{ sss.id }}">
+                    {{ sss.entity }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        送る枚数を教えてください。
+        <table>
+            {{ form_supply.as_table }}
+        </table>
+        送付者:
+        <table>
+            <tr>
+                <th><label for="id_country">国</label></th>
+                <td><select class="p-country-name" id="id_country">
+                        <option value="JP">日本</option>
+                        <option value="TW">台湾</option>
+                        <option value="CN">中国</option>
+                        <option value="VN">ベトナム</option>
+                        <option value="TH">タイ</option>
+                    </select>
+                </td>
+            </tr>
+            {{ form_supplier.as_table }}
+            {{ form_suppliercontact.as_table }}
+        </table>
+        <input type="date">到着日(defaultは今から3日後になってる)
+        送付者(送り元である貴方の住所・連絡先を教えてください。):
+        <input type="text">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title> emask-jp | 医療機関登録</title>
+    <style>
+        .p-demand-qty {
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+    <form action="{% url 'emaskjp:post_submit' %}" method="post" class="h-adr">
+        {% csrf_token %}
+        <input type="hidden" class="p-country-name" value="Japan">
+        <table>
+            {{ form.as_table }}
+        </table>
+
+        {{ form.non_field_errors }}
+
+        マスクが足りない数を入力してください。
+
+        <table>
+            <tr></tr>
+            <tr>
+                <th>{{ formset3.demand0_date_display.value }}
+                    {{ formset3.demand0_date_display.as_hidden }}
+                    {{ formset3.demand0_date.as_hidden }}
+                </th>
+                <th>{{ formset3.demand1_date_display.value }}
+                    {{ formset3.demand1_date_display.as_hidden }}
+                    {{ formset3.demand1_date.as_hidden }}
+                </th>
+                <th>{{ formset3.demand2_date_display.value }}
+                    {{ formset3.demand2_date_display.as_hidden }}
+                    {{ formset3.demand2_date.as_hidden }}
+                </th>
+            </tr>
+            <tr>
+                <td>{{ formset3.demand0_qty }}</td>
+                <td>{{ formset3.demand1_qty }}</td>
+                <td>{{ formset3.demand2_qty }}</td>
+            </tr>
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

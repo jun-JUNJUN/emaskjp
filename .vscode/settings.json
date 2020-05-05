@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "django_env\\Scripts\\python.exe",
+    "python.venvFolders": [
+        "django_env"
+    ],
+    "python.autoComplete.extraPaths": [
+        "./app"
+    ]
+}

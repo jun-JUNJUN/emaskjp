@@ -1,0 +1,9 @@
+{% if latest_RFI_list %}
+<ul>
+    {% for rr in latest_RFI_list %}
+    <li><a href="{% url 'forwarderchat:detail' rr.id %}">{{ rr.customer_name }}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No data available</p>
+{% endif %}
